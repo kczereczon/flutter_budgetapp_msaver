@@ -7,11 +7,14 @@ class Body extends StatelessWidget {
       children: <Widget>[
         Padding(
             child: Buttons(),
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15)),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20)),
         Container(
           padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
-              color: Colors.amber, borderRadius: BorderRadius.circular(10)),
+              color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: 70,
+
         )
       ],
     );
@@ -23,22 +26,36 @@ class Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: 30,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child:
+         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             RaisedButton(
-              child: Text('+ KATEGORIA'),
+              child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white),),
               onPressed: () => null,
+              color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+              ),
             ),
             RaisedButton(
-              child: Text('REPORT'),
+              child: Text('REPORT', style: TextStyle(color: Colors.white),),
               onPressed: () => null,
+              color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
             ),
             RaisedButton(
-              child: Text('+ WYDATEK'),
+              child: Text('+ WYDATEK', style: TextStyle(color: Colors.white),),
               onPressed: () => null,
+              color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
             ),
           ],
-        ));
+        )
+    );
   }
 }
