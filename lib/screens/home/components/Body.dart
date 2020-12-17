@@ -54,7 +54,7 @@ class Buttons extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            RaisedButton(
+            FlatButton(
               child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
@@ -62,7 +62,7 @@ class Buttons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            RaisedButton(
+            FlatButton(
               child: Text('REPORT', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
@@ -70,7 +70,7 @@ class Buttons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            RaisedButton(
+            FlatButton(
               child: Text('+ WYDATEK', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
