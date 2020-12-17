@@ -12,9 +12,8 @@ class Body extends StatelessWidget {
           padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: 70,
-
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 70,
         )
       ],
     );
@@ -31,7 +30,7 @@ class Buttons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             RaisedButton(
-              child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white),),
+              child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
@@ -39,7 +38,7 @@ class Buttons extends StatelessWidget {
               ),
             ),
             RaisedButton(
-              child: Text('REPORT', style: TextStyle(color: Colors.white),),
+              child: Text('REPORT', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
@@ -47,7 +46,7 @@ class Buttons extends StatelessWidget {
               ),
             ),
             RaisedButton(
-              child: Text('+ WYDATEK', style: TextStyle(color: Colors.white),),
+              child: Text('+ WYDATEK', style: TextStyle(color: Colors.white)),
               onPressed: () => null,
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
