@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Category {
+class CategoryModel {
   final Color color;
   final String name;
-  Category({this.color, this.name});
+  CategoryModel({this.color, this.name, DateTime dateTime});
 }
