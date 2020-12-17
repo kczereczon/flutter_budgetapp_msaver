@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pam_2020_msaver/components/Outcome.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
+import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
+import 'package:sqflite/sqflite.dart';
 
 class Body extends StatelessWidget {
   @override

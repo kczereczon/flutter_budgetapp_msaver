@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/screens/home/home_screen.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
-void main() => runApp(MyApp());
-
+void main() async {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,7 +19,6 @@ class MyApp extends StatelessWidget {
                 Theme.of(context).textTheme.apply(bodyColor: Colors.black),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             backgroundColor: Colors.orange[100]),
-        home: HomeScreen()
-      );
+        home: HomeScreen());
   }
 }
