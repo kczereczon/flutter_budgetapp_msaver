@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pam_2020_msaver/components/Outcome.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
+import 'package:pam_2020_msaver/models/OutcomeModel.dart';
 import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,17 +18,29 @@ class Body extends StatelessWidget {
             child: Buttons(),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20)),
         Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.all(8),
-                scrollDirection: Axis.vertical,
+            child: FutureBuilder<List<OutcomeModel>>(
+          future: SqliteDatabase.db.getAllOutcomes(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<OutcomeModel>> snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                padding: EdgeInsets.all(9),
+                itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
+                  OutcomeModel item = snapshot.data[index];
                   return Outcome(
-                    title: "Siema",
-                    category: CategoryModel(color: Colors.amber, name: "siema"),
-                    value: 10,
-                    dateTime: DateTime.now(),
-                  );
-                }))
+                      title: item.name,
+                      dateTime: item.dateTime,
+                      value: item.value,
+                      category: CategoryModel(
+                          color: Color(0xffff0000), name: "pralnia"));
+                },
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ))
       ],
     );
   }

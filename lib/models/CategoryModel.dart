@@ -10,7 +10,7 @@ class CategoryModel {
     return {
       'id': id,
       'name': name,
-      'color': color,
+      'color': color.toString(),
     };
   }
 }
