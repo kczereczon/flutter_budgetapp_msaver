@@ -21,7 +21,6 @@ class SqliteDatabase {
 
     // if _database is null we instantiate it
     _database = await initDB();
-
     return _database;
   }
 

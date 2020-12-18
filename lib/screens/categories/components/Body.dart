@@ -32,6 +32,10 @@ class CategoriesDialog extends State<CategoriesBody> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          backgroundColor: Colors.grey.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15.0))
+                          ),
                           content: Stack(
                             overflow: Overflow.visible,
                             children: <Widget>[
@@ -42,7 +46,7 @@ class CategoriesDialog extends State<CategoriesBody> {
                                     onTap: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Icon(Icons.close)),
+                                    child: Icon(Icons.close, color: Colors.white)),
                               ),
                               Form(
                                 key: _formKey,
@@ -56,11 +60,26 @@ class CategoriesDialog extends State<CategoriesBody> {
                                           Row(
                                             children: [
                                               Text(
-                                                "Nazwa kategori",
+                                                "Nazwa kategorii",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          TextFormField()
+                                          TextFormField(
+                                            cursorColor: Colors.white,
+                                            style: TextStyle(color: Colors.white),
+                                            decoration: new InputDecoration(
+                                                enabledBorder: UnderlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.white)
+                                                ),
+                                              focusedBorder: UnderlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.white)
+                                              ),
+
+                                            ),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -72,6 +91,7 @@ class CategoriesDialog extends State<CategoriesBody> {
                                             children: [
                                               Text(
                                                 "Kolor",
+                                                style: TextStyle(color: Colors.white),
                                               ),
                                             ],
                                           ),
@@ -80,8 +100,7 @@ class CategoriesDialog extends State<CategoriesBody> {
                                             minWidth: MediaQuery.of(context)
                                                 .size
                                                 .width,
-                                            child: RaisedButton(
-                                              elevation: 3.0,
+                                            child: FlatButton(
                                               onPressed: () {
                                                 showDialog(
                                                   context: context,
@@ -139,8 +158,8 @@ class CategoriesDialog extends State<CategoriesBody> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: RaisedButton(
-                                        child: Text("DODAJ"),
+                                      child: FlatButton(
+                                        child: Text("DODAJ", style: TextStyle(color: Colors.white),),
                                         onPressed: () {
                                           if (_formKey.currentState
                                               .validate()) {
