@@ -13,7 +13,8 @@ class CategoriesDialog extends State<CategoriesBody> {
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
 
-  void changeColor(Color color) => setState(() => currentColor = color);
+  void changeColor(Color color) => setState(() => {currentColor = color});
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -75,22 +76,64 @@ class CategoriesDialog extends State<CategoriesBody> {
                                             ],
                                           ),
                                           SizedBox(height: 10),
-                                          ColorPicker(
-                                            pickerColor: currentColor,
-                                            onColorChanged: changeColor,
-                                            colorPickerWidth:
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                            pickerAreaHeightPercent: 0.1,
-                                            enableAlpha: false,
-                                            displayThumbColor: false,
-                                            showLabel: false,
-                                            paletteType: PaletteType.hsv,
-                                            pickerAreaBorderRadius:
-                                                const BorderRadius.all(
-                                                    const Radius.circular(8.0)),
-                                          ),
+                                          ButtonTheme(
+                                            minWidth: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: RaisedButton(
+                                              elevation: 3.0,
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      titlePadding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      contentPadding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      content:
+                                                          SingleChildScrollView(
+                                                        child: ColorPicker(
+                                                          pickerColor:
+                                                              currentColor,
+                                                          onColorChanged:
+                                                              changeColor,
+                                                          colorPickerWidth:
+                                                              300.0,
+                                                          pickerAreaHeightPercent:
+                                                              0.7,
+                                                          enableAlpha: false,
+                                                          displayThumbColor:
+                                                              false,
+                                                          showLabel: false,
+                                                          paletteType:
+                                                              PaletteType.hsv,
+                                                          pickerAreaBorderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft: const Radius
+                                                                .circular(2.0),
+                                                            topRight: const Radius
+                                                                .circular(2.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: const Text(
+                                                  'Kliknij aby zmienić.'),
+                                              color: currentColor,
+                                              textColor: useWhiteForeground(
+                                                      currentColor)
+                                                  ? const Color(0xffffffff)
+                                                  : const Color(0xff000000),
+                                            ),
+                                          )
                                         ],
                                       ),
                                     ),
