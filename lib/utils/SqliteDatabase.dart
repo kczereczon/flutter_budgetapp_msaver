@@ -62,13 +62,13 @@ class SqliteDatabase {
     return res;
   }
 
-  getAllCategories() async {
+  Future<List<CategoryModel>> getAllCategories() async {
     final db = await database;
     var res = await db.query("categories");
     List<CategoryModel> list = res.isNotEmpty
         ? res
             .map((c) =>
-                CategoryModel(color: c['color'], id: c['id'], name: c['name']))
+                CategoryModel(color: Colors.red, id: c['id'], name: c['name']))
             .toList()
         : [];
     return list;
