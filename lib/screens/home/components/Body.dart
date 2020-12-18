@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:pam_2020_msaver/components/Outcome.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/models/OutcomeModel.dart';
+import 'package:pam_2020_msaver/screens/categories/CategoriesScreen.dart';
 import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -56,7 +57,10 @@ class Buttons extends StatelessWidget {
           children: <Widget>[
             FlatButton(
               child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white)),
-              onPressed: () => null,
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CategoriesScreen()))
+              },
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
