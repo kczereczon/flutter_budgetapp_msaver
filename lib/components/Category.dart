@@ -16,7 +16,7 @@ class Category extends StatelessWidget {
                 ? const Color(0xffffffff)
                 : const Color(0xff000000),
           )),
-      padding: EdgeInsets.symmetric(horizontal: 13.0),
+      padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 2),
       decoration: BoxDecoration(
           color: this.color, borderRadius: BorderRadius.circular(10)),
     );

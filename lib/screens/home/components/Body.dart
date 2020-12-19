@@ -58,8 +58,9 @@ class Buttons extends StatelessWidget {
             FlatButton(
               child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white)),
               onPressed: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CategoriesScreen()))
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CategoriesScreen();
+                }))
               },
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
