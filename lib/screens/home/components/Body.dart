@@ -77,7 +77,31 @@ class Buttons extends StatelessWidget {
             ),
             FlatButton(
               child: Text('+ WYDATEK', style: TextStyle(color: Colors.white)),
-              onPressed: () => null,
+              onPressed: () => {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          backgroundColor: Colors.black.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0))),
+                          content: Stack(
+                              overflow: Overflow.visible,
+                              children: <Widget>[
+                                Positioned(
+                                  right: -0.0,
+                                  top: -0.0,
+                                  child: InkResponse(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Icon(Icons.close,
+                                          color: Colors.white)),
+                                ),
+                              ]));
+                    })
+              },
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),

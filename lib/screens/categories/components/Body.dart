@@ -105,6 +105,9 @@ class _NewDialogState extends State<_NewDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.deepPurple[400],
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       content: Stack(
         overflow: Overflow.visible,
         children: <Widget>[
@@ -115,7 +118,7 @@ class _NewDialogState extends State<_NewDialog> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: Icon(Icons.close)),
+                child: Icon(Icons.close, color: Colors.white)),
           ),
           Form(
             key: _formKey,
@@ -130,10 +133,27 @@ class _NewDialogState extends State<_NewDialog> {
                         children: [
                           Text(
                             "Nazwa kategori",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Nazwa nie może być pusta!';
+                          }
+                          return null;
+                        },
+                        cursorColor: Colors.white,
+                        style: TextStyle(color: Colors.white),
+                        decoration: new InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                        ),
                         onChanged: (text) {
                           setState(() {});
                           name = text;
@@ -148,9 +168,10 @@ class _NewDialogState extends State<_NewDialog> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            "Kolor",
-                          ),
+                          Text("Kolor",
+                              style: TextStyle(
+                                color: Colors.white,
+                              )),
                         ],
                       ),
                       SizedBox(height: 10),
@@ -181,10 +202,10 @@ class _NewDialogState extends State<_NewDialog> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    child: Text("DODAJ"),
+                  child: FlatButton(
+                    child: Text("DODAJ", style: TextStyle(color: Colors.white)),
                     onPressed: () {
-                      if (this.name != null) {
+                      if (_formKey.currentState.validate()) {
                         SqliteDatabase.db.insertCategory(CategoryModel(
                             name: this.name, color: this.currentColor));
                         this.onChange();

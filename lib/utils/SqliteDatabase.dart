@@ -22,7 +22,6 @@ class SqliteDatabase {
 
     // if _database is null we instantiate it
     _database = await initDB();
-
     return _database;
   }
 
@@ -76,7 +75,7 @@ class SqliteDatabase {
     List<CategoryModel> list = res.isNotEmpty
         ? res
             .map((c) => CategoryModel(
-                color: Color(res.first['color']), id: c['id'], name: c['name']))
+                color: Color(c['color']), id: c['id'], name: c['name']))
             .toList()
         : [];
     return list;
