@@ -20,28 +20,28 @@ class Body extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20)),
         Expanded(
             child: FutureBuilder<List<OutcomeModel>>(
-          future: SqliteDatabase.db.getAllOutcomes(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<OutcomeModel>> snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                padding: EdgeInsets.all(9),
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  OutcomeModel item = snapshot.data[index];
-                  return Outcome(
-                      title: item.name,
-                      dateTime: item.dateTime,
-                      value: item.value,
-                      category: CategoryModel(
-                          color: Color(0xffff0000), name: "pralnia"));
-                },
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        ))
+              future: SqliteDatabase.db.getAllOutcomes(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<OutcomeModel>> snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    padding: EdgeInsets.all(9),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      OutcomeModel item = snapshot.data[index];
+                      return Outcome(
+                          title: item.name,
+                          dateTime: item.dateTime,
+                          value: item.value,
+                          category: CategoryModel(
+                              color: Color(0xffff0000), name: "pralnia"));
+                    },
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ))
       ],
     );
   }
@@ -57,7 +57,8 @@ class Buttons extends StatelessWidget {
           children: <Widget>[
             FlatButton(
               child: Text('+ KATEGORIA', style: TextStyle(color: Colors.white)),
-              onPressed: () => {
+              onPressed: () =>
+              {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => CategoriesScreen()))
               },
@@ -76,7 +77,32 @@ class Buttons extends StatelessWidget {
             ),
             FlatButton(
               child: Text('+ WYDATEK', style: TextStyle(color: Colors.white)),
-              onPressed: () => null,
+              onPressed: () => {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          backgroundColor: Colors.black.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15.0))
+                          ),
+                          content: Stack(
+                            overflow: Overflow.visible,
+                            children: <Widget>[
+                          Positioned(
+                          right: -0.0,
+                            top: -0.0,
+                            child: InkResponse(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Icon(Icons.close, color: Colors.white)),
+                              ),
+                            ]
+                          )
+                      );
+                    }
+                )},
               color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
