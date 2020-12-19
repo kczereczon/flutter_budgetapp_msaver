@@ -12,6 +12,8 @@ class CategoriesBody extends StatefulWidget {
 }
 
 class CategoryView extends State<CategoriesBody> {
+  Future<List<CategoryModel>> categories = SqliteDatabase.db.getAllCategories();
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -28,7 +30,11 @@ class CategoryView extends State<CategoriesBody> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return _NewDialog();
+                        return _NewDialog(
+                            onChange: () => setState(() => {
+                                  categories =
+                                      SqliteDatabase.db.getAllCategories()
+                                }));
                       })
                 },
                 color: Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
@@ -42,7 +48,7 @@ class CategoryView extends State<CategoriesBody> {
       ),
       Expanded(
           child: FutureBuilder<List<CategoryModel>>(
-        future: SqliteDatabase.db.getAllCategories(),
+        future: categories,
         builder: (BuildContext context,
             AsyncSnapshot<List<CategoryModel>> snapshot) {
           print(snapshot);
@@ -52,7 +58,14 @@ class CategoryView extends State<CategoriesBody> {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 CategoryModel item = snapshot.data[index];
-                return CategoryElement(name: item.name, color: Colors.red);
+                return CategoryElement(
+                    categoryModel: item,
+                    delete: () {
+                      SqliteDatabase.db.deleteCategory(item.id);
+                      setState(() {
+                        categories = SqliteDatabase.db.getAllCategories();
+                      });
+                    });
               },
             );
           } else {
@@ -65,12 +78,25 @@ class CategoryView extends State<CategoriesBody> {
 }
 
 class _NewDialog extends StatefulWidget {
+  _NewDialog({
+    @required this.onChange,
+  });
+
+  final Function onChange;
+
   @override
-  _NewDialogState createState() => _NewDialogState();
+  _NewDialogState createState() => _NewDialogState(onChange: this.onChange);
 }
 
 class _NewDialogState extends State<_NewDialog> {
+  _NewDialogState({
+    @required this.onChange,
+  });
+
+  final Function onChange;
+
   final _formKey = GlobalKey<FormState>();
+  String name;
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
 
@@ -107,7 +133,12 @@ class _NewDialogState extends State<_NewDialog> {
                           ),
                         ],
                       ),
-                      TextFormField()
+                      TextFormField(
+                        onChanged: (text) {
+                          setState(() {});
+                          name = text;
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -154,7 +185,9 @@ class _NewDialogState extends State<_NewDialog> {
                     child: Text("DODAJ"),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
+                        SqliteDatabase.db.insertCategory(CategoryModel(
+                            name: this.name, color: this.currentColor));
+                        this.onChange();
                         Navigator.of(context).pop();
                       }
                     },

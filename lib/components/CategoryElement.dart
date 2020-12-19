@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:pam_2020_msaver/components/Category.dart';
+import 'package:pam_2020_msaver/models/CategoryModel.dart';
 
 class CategoryElement extends StatelessWidget {
-  final Color color;
-  final String name;
-  CategoryElement({this.color, this.name});
+  final CategoryModel categoryModel;
+  CategoryElement({this.categoryModel, @required this.delete});
+
+  final Function delete;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +18,15 @@ class CategoryElement extends StatelessWidget {
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Category(
-            color: this.color,
-            name: this.name,
+            color: this.categoryModel.color,
+            name: this.categoryModel.name,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [InkResponse(onTap: delete, child: Icon(Icons.delete))],
           )
         ],
       ),

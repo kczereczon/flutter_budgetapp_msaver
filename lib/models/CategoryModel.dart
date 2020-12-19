@@ -7,10 +7,6 @@ class CategoryModel {
   CategoryModel({this.color, this.name, this.id});
 
   Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'color': color.toString(),
-    };
+    return {'id': id, 'name': name, 'color': this.color.value};
   }
 }

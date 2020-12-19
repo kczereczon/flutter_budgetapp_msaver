@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pam_2020_msaver/main.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/models/OutcomeModel.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,14 +28,14 @@ class SqliteDatabase {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "outcomes.db");
+    String path = join(documentsDirectory.path, "outcomes2.db");
     print(path);
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE categories ("
           "id INTEGER PRIMARY KEY,"
           "name TEXT,"
-          "color TEXT"
+          "color INTEGER"
           ")");
       await db.execute("CREATE TABLE outcomes ("
           "id INTEGER PRIMARY KEY,"
@@ -52,8 +53,15 @@ class SqliteDatabase {
     var res = await db.query("categories", where: "id = ?", whereArgs: [id]);
     return res.isNotEmpty
         ? CategoryModel(
-            id: res.first['id'], name: res.first['name'], color: Colors.red)
+            id: res.first['id'],
+            name: res.first['name'],
+            color: Color(res.first['color']))
         : Null;
+  }
+
+  deleteCategory(int id) async {
+    final db = await database;
+    db.delete("categories", where: "id = ?", whereArgs: [id]);
   }
 
   insertCategory(CategoryModel newClient) async {
@@ -67,8 +75,8 @@ class SqliteDatabase {
     var res = await db.query("categories");
     List<CategoryModel> list = res.isNotEmpty
         ? res
-            .map((c) =>
-                CategoryModel(color: Colors.red, id: c['id'], name: c['name']))
+            .map((c) => CategoryModel(
+                color: Color(res.first['color']), id: c['id'], name: c['name']))
             .toList()
         : [];
     return list;
