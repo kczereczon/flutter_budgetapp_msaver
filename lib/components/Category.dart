@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class Category extends StatelessWidget {
   final Color color;
@@ -11,7 +12,9 @@ class Category extends StatelessWidget {
       child: Text(this.name,
           style: TextStyle(
             fontWeight: FontWeight.w400,
-            color: Colors.white,
+            color: useWhiteForeground(this.color)
+                ? const Color(0xffffffff)
+                : const Color(0xff000000),
           )),
       padding: EdgeInsets.symmetric(horizontal: 13.0),
       decoration: BoxDecoration(

@@ -28,7 +28,7 @@ class SqliteDatabase {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "outcomes2.db");
+    String path = join(documentsDirectory.path, "database.db");
     print(path);
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {

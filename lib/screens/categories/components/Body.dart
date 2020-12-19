@@ -184,7 +184,7 @@ class _NewDialogState extends State<_NewDialog> {
                   child: RaisedButton(
                     child: Text("DODAJ"),
                     onPressed: () {
-                      if (_formKey.currentState.validate()) {
+                      if (this.name != null) {
                         SqliteDatabase.db.insertCategory(CategoryModel(
                             name: this.name, color: this.currentColor));
                         this.onChange();
