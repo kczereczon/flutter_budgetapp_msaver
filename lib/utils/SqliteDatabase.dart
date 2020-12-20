@@ -86,6 +86,11 @@ class SqliteDatabase {
     return res;
   }
 
+  deleteCategoryOutcome(int id) async {
+    final db = await database;
+    db.delete("outcomes", where: "category_id = ?", whereArgs: [id]);
+}
+
   Future<List<OutcomeModel>> getAllOutcomes() async {
     final db = await database;
     var res = await db.rawQuery(

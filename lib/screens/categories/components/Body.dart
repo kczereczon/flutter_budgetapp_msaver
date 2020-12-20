@@ -62,6 +62,7 @@ class CategoryView extends State<CategoriesBody> {
                     categoryModel: item,
                     delete: () {
                       SqliteDatabase.db.deleteCategory(item.id);
+                      SqliteDatabase.db.deleteCategoryOutcome(item.id);
                       setState(() {
                         categories = SqliteDatabase.db.getAllCategories();
                       });
