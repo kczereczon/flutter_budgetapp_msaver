@@ -28,7 +28,6 @@ class SqliteDatabase {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "database.db");
-    print(path);
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE categories ("
@@ -89,16 +88,21 @@ class SqliteDatabase {
 
   Future<List<OutcomeModel>> getAllOutcomes() async {
     final db = await database;
-    var res = await db.query("outcomes");
+    var res = await db.rawQuery(
+        "SELECT outcomes.*, categories.name as c_name, categories.color as c_color, categories.id as c_id FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id;");
     print(res);
     List<OutcomeModel> list = res.isNotEmpty
-        ? res
-            .map((c) => OutcomeModel(
+        ? res.map((c) {
+            return OutcomeModel(
                 value: double.parse(c['value']),
                 id: c['id'],
                 name: c['name'],
-                dateTime: DateTime.parse(c['datetime'])))
-            .toList()
+                dateTime: DateTime.parse(c['datetime']),
+                category: CategoryModel(
+                    color: Color(c['c_color']),
+                    name: c['c_name'],
+                    id: c['c_id']));
+          }).toList()
         : [];
     return list;
   }
