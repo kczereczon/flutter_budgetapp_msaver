@@ -8,6 +8,7 @@ import 'package:pam_2020_msaver/components/Outcome.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/models/OutcomeModel.dart';
 import 'package:pam_2020_msaver/screens/categories/CategoriesScreen.dart';
+import 'package:pam_2020_msaver/screens/raport/RaportScreen.dart';
 import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -49,7 +50,12 @@ class _BodyState extends State<Body> {
                     FlatButton(
                       child:
                           Text('REPORT', style: TextStyle(color: Colors.white)),
-                      onPressed: () => null,
+                      onPressed: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return RaportScreen();
+                            }))
+                      },
                       color:
                           Color.lerp(Colors.transparent, Colors.grey[100], 0.6),
                       shape: RoundedRectangleBorder(
@@ -111,6 +117,7 @@ class _BodyState extends State<Body> {
 
 class _NewOutcomeAlert extends StatefulWidget {
   _NewOutcomeAlert({this.updateOutcomes});
+
   String title = "";
   double value = 0.00;
   CategoryModel category;
