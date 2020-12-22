@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pam_2020_msaver/main.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/models/OutcomeModel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'dart:io';
 import 'dart:async';
 
 class SqliteDatabase {
@@ -89,6 +87,19 @@ class SqliteDatabase {
   deleteCategoryOutcome(int id) async {
     final db = await database;
     db.delete("outcomes", where: "category_id = ?", whereArgs: [id]);
+}
+
+
+ Future getSumOutcome() async {
+    var db = await database;
+    var result = await db.rawQuery("SELECT SUM(value) as sum FROM outcomes");
+    return result.toList();
+}
+
+Future getSumMonth() async {
+    var db = await database;
+    var result = await db.rawQuery("SELECT SUM(value) as sum FROM outcomes WHERE datetime >= date(2020-06-12)");
+    return result.toList();
 }
 
   Future<List<OutcomeModel>> getAllOutcomes() async {

@@ -8,97 +8,24 @@ class Raport extends StatelessWidget {
   Color color;
   CategoryModel category;
 
-  Raport(
-      {Key key,
-        this.value,
-        this.color,
-        this.category})
-      : super(key: key);
+  Raport({Key key, this.value, this.color, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Column(
+    return Column(children: <Widget>[
+      Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Raport", style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold
-              )),
-            ],
+          Category(
+            color: this.category.color,
+            name: this.category.name,
           ),
           Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Twoje wydatki z miesiąca", style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("LINIA KOLOR", style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Twoje wydatki z miesiąca", style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Twoje wydatki ogólne", style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("LINIA KOLOR", style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Twoje wydatki ogólne", style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w200
-              )),
-            ],
-          ),
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [InkResponse(child: Icon(Icons.delete))],
+          )
         ],
       ),
-      height: 240,
-    );
+    ]);
   }
 }

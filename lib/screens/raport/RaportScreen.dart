@@ -4,5 +4,5 @@ import 'package:pam_2020_msaver/screens/raport/components/Body.dart';
 
 
 class RaportScreen extends AppScaffold {
-  RaportScreen() : super(body: RaportBody());
+  RaportScreen() : super(body: Body());
 }
