@@ -35,11 +35,17 @@ class _BodyState extends State<Body> {
                     FlatButton(
                       child: Text('+ KATEGORIA',
                           style: TextStyle(color: Colors.white)),
-                      onPressed: () => {
-                        Navigator.push(context,
+                      onPressed: () async {
+                        bool refresh = await Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return CategoriesScreen();
-                        }))
+                        }));
+
+                        if(refresh) {
+                          setState(() {
+                              widget.outcomes = SqliteDatabase.db.getAllOutcomes();
+                          });
+                        }
                       },
                       color:
                           Color.lerp(Colors.transparent, Colors.grey[100], 0.6),

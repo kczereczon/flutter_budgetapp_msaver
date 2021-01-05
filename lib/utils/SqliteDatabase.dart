@@ -25,7 +25,7 @@ class SqliteDatabase {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "database.db");
+    String path = join(documentsDirectory.path, "database_msaver.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE categories ("
@@ -39,7 +39,7 @@ class SqliteDatabase {
           "value TEXT,"
           "category_id INTEGER,"
           "datetime DATETIME,"
-          "FOREIGN KEY(category_id) REFERENCES categories(id)"
+          "FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE CASCADE"
           ")");
     });
   }
