@@ -41,9 +41,10 @@ class _BodyState extends State<Body> {
                           return CategoriesScreen();
                         }));
 
-                        if(refresh) {
+                        if (refresh) {
                           setState(() {
-                              widget.outcomes = SqliteDatabase.db.getAllOutcomes();
+                            widget.outcomes =
+                                SqliteDatabase.db.getAllOutcomes();
                           });
                         }
                       },
@@ -59,8 +60,8 @@ class _BodyState extends State<Body> {
                       onPressed: () => {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return RaportScreen();
-                            }))
+                          return RaportScreen();
+                        }))
                       },
                       color:
                           Color.lerp(Colors.transparent, Colors.grey[100], 0.6),

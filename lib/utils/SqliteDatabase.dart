@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
 import 'package:pam_2020_msaver/models/OutcomeModel.dart';
 import 'package:path_provider/path_provider.dart';
@@ -87,20 +88,27 @@ class SqliteDatabase {
   deleteCategoryOutcome(int id) async {
     final db = await database;
     db.delete("outcomes", where: "category_id = ?", whereArgs: [id]);
-}
+  }
 
-
- Future getSumOutcome() async {
+  Future getSumOutcome() async {
     var db = await database;
-    var result = await db.rawQuery("SELECT SUM(value) as sum FROM outcomes");
+    var result = await db.rawQuery("SELECT categories.name as c_name, categories.color as c_color, categories.id as c_id, SUM(value) as sum FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id GROUP BY category_id");
     return result.toList();
-}
+  }
 
-Future getSumMonth() async {
+  Future getSumMonth() async {
     var db = await database;
-    var result = await db.rawQuery("SELECT SUM(value) as sum FROM outcomes WHERE datetime >= date(2020-06-12)");
+    DateTime now = new DateTime.now();
+    DateTime lastDayOfMonth = new DateTime(now.year, now.month + 1, 0);
+    var formatter = new DateFormat('yyyy-MM-dd');
+    var result = await db.rawQuery(
+        "SELECT categories.name as c_name, categories.color as c_color, categories.id as c_id, SUM(value) as sum FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id WHERE datetime BETWEEN \"" +
+            formatter.format(now) +
+            "\" AND \"" +
+            formatter.format(lastDayOfMonth) +
+            "\" GROUP BY category_id ORDER BY sum DESC");
     return result.toList();
-}
+  }
 
   Future<List<OutcomeModel>> getAllOutcomes() async {
     final db = await database;

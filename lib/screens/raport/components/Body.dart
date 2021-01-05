@@ -2,10 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pam_2020_msaver/components/Raport.dart';
 import 'package:pam_2020_msaver/models/CategoryModel.dart';
+import 'package:pam_2020_msaver/screens/raport/components/BarChart.dart';
 import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
 
 class Body extends StatefulWidget {
   Future<List<CategoryModel>> categories = SqliteDatabase.db.getAllCategories();
+  List allSummedMonth;
+  List allSummed;
 
   @override
   State<Body> createState() {
@@ -48,24 +51,17 @@ class _RaportView extends State<Body> {
                         TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               ],
             ),
+            SizedBox(height: 10),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Twoje wydatki z miesiąca",
                     style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.w200)),
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.w300)),
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("LINIA KOLOR",
-                    style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.w200)),
-              ],
-            ),
+            BarChart(items: widget.allSummedMonth),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,24 +71,17 @@ class _RaportView extends State<Body> {
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w200)),
               ],
             ),
+            SizedBox(height: 20),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Twoje wydatki ogólne",
                     style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.w200)),
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.w300)),
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("LINIA KOLOR",
-                    style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.w200)),
-              ],
-            ),
+            BarChart(items: widget.allSummedMonth),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,7 +93,6 @@ class _RaportView extends State<Body> {
             ),
           ],
         ),
-        height: 240,
       ),
       Container(
           margin: EdgeInsets.only(top: 10),
@@ -129,18 +117,25 @@ class _RaportView extends State<Body> {
   }
 
   void displayTotal() async{
-    var total = (await SqliteDatabase.db.getSumOutcome())[0]['sum'];
+    widget.allSummed = await SqliteDatabase.db.getSumOutcome();
+    print(widget.allSummed);
     setState(() {
-      print("$total");
+      double total = 0;
+      widget.allSummed.forEach((item) {
+        total += item['sum'];
+      });
       getTotal = total;
     });
   }
 
   void diplayMonth() async {
-    var total1 = (await SqliteDatabase.db.getSumMonth())[0]['sum'];
+    widget.allSummedMonth = await SqliteDatabase.db.getSumMonth();
     setState(() {
-      print("$total1");
-      getMonth = total1;
+      double total = 0;
+      widget.allSummedMonth.forEach((item) {
+        total += item['sum'];
+      });
+      getMonth = total;
     });
   }
 }
