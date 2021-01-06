@@ -161,7 +161,7 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.purple[700],
+      backgroundColor:  Colors.white,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       content: Stack(
@@ -174,7 +174,7 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: Icon(Icons.close, color: Colors.white)),
+                child: Icon(Icons.close, color: Colors.black)),
           ),
           Form(
             key: _formKey,
@@ -190,16 +190,16 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                         }
                         return null;
                       },
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white70),
+                      cursorColor: Colors.black,
+                      style: TextStyle(color: Colors.black54),
                       decoration: new InputDecoration(
                         labelText: "Nazwa wydatku",
                         hintText: "np. zakupy biedronka",
-                        labelStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                       ),
                       onChanged: (text) {
                         setState(() {
@@ -219,16 +219,16 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                         }
                         return null;
                       },
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white70),
+                      cursorColor: Colors.black,
+                      style: TextStyle(color: Colors.black54),
                       decoration: InputDecoration(
                         labelText: "Kwota",
                         hintText: "np. 10.00",
-                        labelStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                       ),
                       onChanged: (text) {
                         setState(() {
@@ -239,11 +239,11 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                     DropdownButtonFormField<CategoryModel>(
                       decoration: InputDecoration(
                         labelText: 'Kategoria',
-                        labelStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                       ),
                       items: widget.categories
                           .map<DropdownMenuItem<CategoryModel>>(
@@ -258,14 +258,14 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                       },
                       icon: Icon(
                         Icons.arrow_downward,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       value: widget.category,
                       selectedItemBuilder: (BuildContext context) {
                         return widget.categories.map((CategoryModel value) {
                           return Text(
                             widget.category.name,
-                            style: TextStyle(color: Colors.white70),
+                            style: TextStyle(color: Colors.black54),
                           );
                         }).toList();
                       },
@@ -274,7 +274,7 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                       padding: const EdgeInsets.all(8.0),
                       child: FlatButton(
                         child: Text("DODAJ",
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: Colors.black)),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             print(SqliteDatabase.db.insertOutcome(OutcomeModel(

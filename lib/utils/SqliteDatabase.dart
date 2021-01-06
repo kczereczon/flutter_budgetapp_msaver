@@ -92,18 +92,21 @@ class SqliteDatabase {
 
   Future getSumOutcome() async {
     var db = await database;
-    var result = await db.rawQuery("SELECT categories.name as c_name, categories.color as c_color, categories.id as c_id, SUM(value) as sum FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id GROUP BY category_id");
+    var result = await db.rawQuery("SELECT categories.name as c_name, categories.color as c_color, categories.id as c_id, SUM(value) as sum FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id GROUP BY category_id ORDER BY sum DESC");
     return result.toList();
   }
 
   Future getSumMonth() async {
     var db = await database;
     DateTime now = new DateTime.now();
+    DateTime firstDayOfMont = new DateTime(now.year, now.month, 0);
     DateTime lastDayOfMonth = new DateTime(now.year, now.month + 1, 0);
+    print(firstDayOfMont);
+    print(lastDayOfMonth);
     var formatter = new DateFormat('yyyy-MM-dd');
     var result = await db.rawQuery(
         "SELECT categories.name as c_name, categories.color as c_color, categories.id as c_id, SUM(value) as sum FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id WHERE datetime BETWEEN \"" +
-            formatter.format(now) +
+            formatter.format(firstDayOfMont) +
             "\" AND \"" +
             formatter.format(lastDayOfMonth) +
             "\" GROUP BY category_id ORDER BY sum DESC");

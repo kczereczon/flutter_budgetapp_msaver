@@ -39,14 +39,9 @@ class AppScaffold extends StatelessWidget {
               child: IconButton(
                   icon: SvgPicture.asset("assets/icons/left-arrow.svg"),
                   onPressed: () {
-                    Navigator.pop(context, true);
+                    Navigator.maybePop(context, true);
                   }),
               visible: Navigator.canPop(context)),
-          actions: [
-            IconButton(
-                icon: SvgPicture.asset("assets/icons/more.svg"),
-                onPressed: null)
-          ],
         ),
       ),
     );
