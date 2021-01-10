@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pam_2020_msaver/components/Category.dart';
-import 'package:pam_2020_msaver/models/CategoryModel.dart';
+import 'package:MSAVER/components/Category.dart';
+import 'package:MSAVER/models/CategoryModel.dart';
 
 class Outcome extends StatelessWidget {
   String title;

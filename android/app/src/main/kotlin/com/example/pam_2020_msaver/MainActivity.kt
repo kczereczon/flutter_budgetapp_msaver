@@ -1,4 +1,4 @@
-package com.example.pam_2020_msaver
+package com.example.MSAVER
 
 import io.flutter.embedding.android.FlutterActivity
 

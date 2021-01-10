@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pam_2020_msaver/screens/home/HomeScreen.dart';
+import 'package:MSAVER/screens/home/HomeScreen.dart';
 
 void main() async {
   runApp(MyApp());

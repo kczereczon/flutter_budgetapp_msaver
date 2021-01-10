@@ -4,12 +4,12 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pam_2020_msaver/components/Outcome.dart';
-import 'package:pam_2020_msaver/models/CategoryModel.dart';
-import 'package:pam_2020_msaver/models/OutcomeModel.dart';
-import 'package:pam_2020_msaver/screens/categories/CategoriesScreen.dart';
-import 'package:pam_2020_msaver/screens/raport/RaportScreen.dart';
-import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
+import 'package:MSAVER/components/Outcome.dart';
+import 'package:MSAVER/models/CategoryModel.dart';
+import 'package:MSAVER/models/OutcomeModel.dart';
+import 'package:MSAVER/screens/categories/CategoriesScreen.dart';
+import 'package:MSAVER/screens/raport/RaportScreen.dart';
+import 'package:MSAVER/utils/SqliteDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Body extends StatefulWidget {

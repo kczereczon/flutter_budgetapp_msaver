@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:pam_2020_msaver/components/CategoryElement.dart';
-import 'package:pam_2020_msaver/models/CategoryModel.dart';
-import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
+import 'package:MSAVER/components/CategoryElement.dart';
+import 'package:MSAVER/models/CategoryModel.dart';
+import 'package:MSAVER/utils/SqliteDatabase.dart';
 
 class CategoriesBody extends StatefulWidget {
   @override

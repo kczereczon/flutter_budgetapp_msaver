@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:pam_2020_msaver/components/Raport.dart';
-import 'package:pam_2020_msaver/models/CategoryModel.dart';
-import 'package:pam_2020_msaver/screens/raport/components/BarChart.dart';
-import 'package:pam_2020_msaver/utils/SqliteDatabase.dart';
+import 'package:MSAVER/components/Raport.dart';
+import 'package:MSAVER/models/CategoryModel.dart';
+import 'package:MSAVER/screens/raport/components/BarChart.dart';
+import 'package:MSAVER/utils/SqliteDatabase.dart';
 
 class Body extends StatefulWidget {
   Future<List<CategoryModel>> categories = SqliteDatabase.db.getAllCategories();
