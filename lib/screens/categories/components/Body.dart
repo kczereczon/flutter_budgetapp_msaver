@@ -133,7 +133,7 @@ class _NewDialogState extends State<_NewDialog> {
                       Row(
                         children: [
                           Text(
-                            "Nazwa kategori",
+                            "Nazwa kategorii",
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w800

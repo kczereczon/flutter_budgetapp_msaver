@@ -22,6 +22,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,7 +57,7 @@ class _BodyState extends State<Body> {
                     ),
                     FlatButton(
                       child:
-                          Text('REPORT', style: TextStyle(color: Colors.white)),
+                          Text('RAPORT', style: TextStyle(color: Colors.white)),
                       onPressed: () => {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -106,10 +107,18 @@ class _BodyState extends State<Body> {
                 itemBuilder: (BuildContext context, int index) {
                   OutcomeModel item = snapshot.data[index];
                   return Outcome(
+                      id: item.id,
                       title: item.name,
                       dateTime: item.dateTime,
                       value: item.value,
-                      category: item.category);
+                      category: item.category,
+                      delete: (id) {
+                        setState(() {
+                            widget.outcomes =
+                                SqliteDatabase.db.getAllOutcomes();
+                          });
+                      }
+                      );
                 },
               );
             } else {

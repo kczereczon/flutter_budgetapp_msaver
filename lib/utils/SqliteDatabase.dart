@@ -61,6 +61,12 @@ class SqliteDatabase {
     db.delete("categories", where: "id = ?", whereArgs: [id]);
   }
 
+
+  deleteOutcome(int id) async {
+    final db = await database;
+    db.delete("outcomes", where: "id = ?", whereArgs: [id]);
+  }
+
   insertCategory(CategoryModel newClient) async {
     final db = await database;
     var res = await db.insert("categories", newClient.toMap());
@@ -116,7 +122,7 @@ class SqliteDatabase {
   Future<List<OutcomeModel>> getAllOutcomes() async {
     final db = await database;
     var res = await db.rawQuery(
-        "SELECT outcomes.*, categories.name as c_name, categories.color as c_color, categories.id as c_id FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id;");
+        "SELECT outcomes.*, categories.name as c_name, categories.color as c_color, categories.id as c_id FROM outcomes LEFT JOIN categories ON outcomes.category_id = categories.id ORDER BY datetime DESC;");
     print(res);
     List<OutcomeModel> list = res.isNotEmpty
         ? res.map((c) {
