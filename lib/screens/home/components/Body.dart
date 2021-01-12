@@ -22,7 +22,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -109,16 +108,15 @@ class _BodyState extends State<Body> {
                   return Outcome(
                       id: item.id,
                       title: item.name,
-                      dateTime: item.dateTime,
                       value: item.value,
                       category: item.category,
-                      delete: (id) {
-                        setState(() {
-                            widget.outcomes =
-                                SqliteDatabase.db.getAllOutcomes();
-                          });
-                      }
-                      );
+                       dateTime: item.dateTime,
+                       delete: (id) {
+                         SqliteDatabase.db.deleteOutcome(id);
+                         setState(() {
+                           widget.outcomes = SqliteDatabase.db.getAllOutcomes();
+                         });
+                       });
                 },
               );
             } else {
@@ -170,7 +168,7 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor:  Colors.white,
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       content: Stack(
@@ -204,7 +202,8 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                       decoration: new InputDecoration(
                         labelText: "Nazwa wydatku",
                         hintText: "np. zakupy biedronka",
-                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+                        labelStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
@@ -233,7 +232,8 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                       decoration: InputDecoration(
                         labelText: "Kwota",
                         hintText: "np. 10.00",
-                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+                        labelStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
@@ -248,7 +248,8 @@ class _NewOutcomeAlertState extends State<_NewOutcomeAlert> {
                     DropdownButtonFormField<CategoryModel>(
                       decoration: InputDecoration(
                         labelText: 'Kategoria',
-                        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+                        labelStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w800),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(

@@ -35,7 +35,7 @@ class Outcome extends StatelessWidget {
         children: [
           Expanded(
             flex: 8,
-                      child: Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
@@ -61,13 +61,14 @@ class Outcome extends StatelessWidget {
                       color: this.category.color,
                       name: this.category.name,
                     ),
-                    
                   ],
                 ),
               ],
             ),
           ),
-          Expanded(child: InkResponse(onTap: () => this.delete(this.id), child: Icon(Icons.delete)))
+          Expanded(
+              child: InkResponse(
+                  onTap: () => this.delete(this.id), child: Icon(Icons.delete)))
         ],
       ),
       height: 70,

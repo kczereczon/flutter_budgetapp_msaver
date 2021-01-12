@@ -135,9 +135,8 @@ class _NewDialogState extends State<_NewDialog> {
                           Text(
                             "Nazwa kategorii",
                             style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800
-                            ),
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800),
                           ),
                         ],
                       ),
@@ -172,9 +171,8 @@ class _NewDialogState extends State<_NewDialog> {
                         children: [
                           Text("Kolor",
                               style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w800
-                              )),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w800)),
                         ],
                       ),
                       SizedBox(height: 10),
